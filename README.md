@@ -6,7 +6,11 @@
 First I removed all the files and that I wouldn't need in this project and replace'em with the components that I'm gonna use them throughout this projct.
 
 
-### `npm test`
+### Add Dark and Light btn
+
+I start with made a nice btn for toggle btween the dark and light mode easily.
+The problem here was how to access the body element while you're using React however, I solved it by check first if the state of the dark mode is false or true and then but some taiwlind classes to the 'document.body'. 
+
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
