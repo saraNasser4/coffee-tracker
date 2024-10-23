@@ -12,8 +12,10 @@ I start with made a nice btn for toggle btween the dark and light mode easily.
 The problem here was how to access the body element while you're using React however, I solved it by check first if the state of the dark mode is false or true and then but some taiwlind classes to the 'document.body'. 
 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Add header to the page
+
+Added header and make it stylish for both dark and light mode and responsive to fit in.
+
 
 ### `npm run build`
 

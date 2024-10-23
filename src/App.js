@@ -27,7 +27,6 @@ function App() {
   return (
     <Layout darkAndLight={<DAL state={state} toggleDarkMode={toggleDarkMode} />}>
       <Hero />
-      <DAL />
       <CoffeeForm />
       {isAuthentication && authenticatedContent}
     </Layout>
