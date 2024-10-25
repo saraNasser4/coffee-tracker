@@ -5,3 +5,8 @@
 *{
     @apply duration-200 transition-colors;
 }
+
+::selection {
+    background-color: #78350f;
+    color: #fff;
+}
