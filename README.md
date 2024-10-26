@@ -26,3 +26,7 @@ I made both Hero and Layout component stylish and responsive so I give a room to
 
 One problem that I faced was switch btween the coffee btns when you click on Other Btn to make it not active it remove it but in the same time put the active in the last btn you'd chosen so I solve it by when you click on the Other btn it will make the data from the other btns null.
 
+
+### Finish with styling and add fake data in Stats component
+
+I've been trying to make the cards in that component dynamic as I can cuz they are repetitive so I make an object that contains the whole data about each card and render to the screen so the code is more organize.

@@ -16,7 +16,7 @@ function App() {
     document.body.classList.toggle("bg-black", isDarkMode)
   }
 
-  const isAuthentication = false
+  const isAuthentication = true 
   const authenticatedContent = (
     <>
       <Stats />
