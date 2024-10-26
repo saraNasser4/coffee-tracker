@@ -3,7 +3,7 @@ function Hero (){
   const paragraphs = ['Tracking every coffee', 'Measuring your blood caffeine levels', 'Costing and quanitifying your addition']
 
     return (
-      <div className="mt-32 p-6">
+      <section className="mt-32 p-6">
         <h1 className="font-bold text-4xl md:text-5xl">Coffee Tracking for Coffee <span className="border-b-4 border-dotted">Fiends!</span></h1>
         <h3 className="text-2xl md:text-3xl my-6 md:my-8 font-semibold">Try <span className="font-bold"><span className="bg-amber-900 pl-3 pr-1 text-white dark:text-black">C</span>affiend</span> and start...</h3>
         {paragraphs.map((text, index)=> {
@@ -22,7 +22,7 @@ function Hero (){
           <h5 className="text-[17px] md:text-xl my-4 font-bold">That caffeine's half-life is about 5 hours?</h5>
           <p className="md:text-lg font-medium">This means that after 5 hours, half the caffeine you consumed is still in your system, keeping you alert longer! so if you drink a cup of coffee with 200mg of caffeine, 5 hours, later, you'll still have about 100 mg of caffeine in your system.</p>
         </div>
-      </div>
+      </section>
     )
   }
   

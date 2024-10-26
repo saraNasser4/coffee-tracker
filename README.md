@@ -19,10 +19,10 @@ Added header and make it stylish for both dark and light mode and responsive to 
 
 ### Finish styling of Hero and Layout components
 
-I made both Hero and Layout comonent stylish and responsive so I give a room to implementing the logic for both of them.
+I made both Hero and Layout component stylish and responsive so I give a room to implementing the logic for both of them.
 
 
-### 
+### Finish Styling of CoffeeForm component
 
-
+One problem that I faced was switch btween the coffee btns when you click on Other Btn to make it not active it remove it but in the same time put the active in the last btn you'd chosen so I solve it by when you click on the Other btn it will make the data from the other btns null.
 
