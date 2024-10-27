@@ -30,3 +30,9 @@ One problem that I faced was switch btween the coffee btns when you click on Oth
 ### Finish with styling and add fake data in Stats component
 
 I've been trying to make the cards in that component dynamic as I can cuz they are repetitive so I make an object that contains the whole data about each card and render to the screen so the code is more organize.
+
+
+### Finish with History component
+
+One new thing I've learnt in this part was that I can display a massage when I hover over it by adding title attribute to the element. 
+I made a dynamic coffee icons that changes its number according to the average amount of coffee you have.

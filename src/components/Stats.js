@@ -1,19 +1,20 @@
 import { IoStatsChart } from "react-icons/io5";
-import { calculateCurrentCaffeineLevel, coffeeConsumptionHistory, statusLevels } from "../utils";
+import { calculateCoffeeStats, calculateCurrentCaffeineLevel, coffeeConsumptionHistory, getTopThreeCoffees, statusLevels } from "../utils";
 
 function Stats(){
-  const stats = {
-    daily_caffeine: 240, 
-    daily_cost: 6.8,
-    average_coffees: 2.3,
-    total_cost: 220,
-  }
-  const caffeineLevel = calculateCurrentCaffeineLevel(coffeeConsumptionHistory)
+  const stats = calculateCoffeeStats(coffeeConsumptionHistory);
+
+  const caffeineLevel = calculateCurrentCaffeineLevel(coffeeConsumptionHistory);
+  const warningLeverl = Number(caffeineLevel) <= statusLevels['low'].maxLevel ? 
+    'low' :
+    Number(caffeineLevel) <= statusLevels['moderate'].maxLevel ?
+    'moderate' : 
+    'high';
 
   const statsCards = [
     {title: 'Active Caffeine Level', lg: true, data: [caffeineLevel, 'mg']},
     {title: 'Daily Caffeine', lg: false, data: [stats.daily_caffeine, 'mg']},
-    {title: 'Avg # of Coffees', lg: false, data: [stats.average_coffees, 'mg']},
+    {title: 'Avg # of Coffees', lg: false, data: [stats.average_coffees]},
     {title: 'Daily Cost ($)', lg: false, data: ['$',stats.daily_cost]},
     {title: 'Total cost', lg: false, data: ['$',stats.total_cost]},
   ]
@@ -32,8 +33,8 @@ function Stats(){
                 <span>{card.data[1]}</span>
                 {card.lg && (
                   <>
-                    <h4 className="w-20 inline-block ml-10 text-center" style={{color: statusLevels['low'].color, background: statusLevels['low'].background}}>Low</h4>
-                    <p className="pt-6">{statusLevels['low'].description}</p>
+                    <h4 className="w-20 inline-block ml-10 text-center" style={{color: statusLevels[warningLeverl].color, background: statusLevels[warningLeverl].background}}>Low</h4>
+                    <p className="pt-6">{statusLevels[warningLeverl].description}</p>
                   </>
                   )}
               </p>
@@ -42,6 +43,26 @@ function Stats(){
           )
         })}
       </div>
+      <table className="w-full">
+        <thead className="bg-gray-200/60 dark:bg-[#181818]">
+          <tr className="[&>*]:p-4 [&>*]:text-center [&>*]:sm:text-start">
+            <th>Coffee Name</th>
+            <th>Number of Purchase</th>
+            <th>Percentage of Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {getTopThreeCoffees(coffeeConsumptionHistory).map((coffee, index)=> {
+            return (
+              <tr key={index} className="hover:bg-gray-200/60 dark:hover:bg-[#181818] border dark:border-[#181818] cursor-pointer [&>*]:p-2 [&>*]:md:p-4">
+                <td>{coffee.coffeeName}</td>
+                <td>{coffee.count}</td>
+                <td>{coffee.percentage}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </section>
   )
 }
