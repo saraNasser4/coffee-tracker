@@ -10,6 +10,7 @@ import { useState } from "react";
 function App() {
   const [state, setState] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const toggleDarkMode = ()=>{
     setState(!state)
@@ -18,7 +19,6 @@ function App() {
     document.body.classList.toggle("bg-black", isDarkMode)
   }
 
-  const isAuthentication = true 
   const authenticatedContent = (
     <>
       <Stats />
@@ -27,10 +27,14 @@ function App() {
   )
 
   return (
-    <Layout darkAndLight={<DAL state={state} toggleDarkMode={toggleDarkMode} />} showModal={showModal} setShowModal={setShowModal} >
+    <Layout 
+      darkAndLight={<DAL state={state} toggleDarkMode={toggleDarkMode} />} 
+      showModal={showModal} 
+      setShowModal={setShowModal}
+      setIsAuthenticating={setIsAuthenticating} >
       <Hero />
-      <CoffeeForm isAuthentication={isAuthentication} setShowModal={setShowModal} />
-      {isAuthentication && authenticatedContent}
+      <CoffeeForm isAuthenticating={isAuthenticating} setShowModal={setShowModal} />
+      {isAuthenticating && authenticatedContent}
     </Layout>
   );
 }

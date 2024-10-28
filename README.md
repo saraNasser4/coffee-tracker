@@ -48,3 +48,9 @@ I started by adding new root to my html page so it would be independent compare 
 
 I faced a problem which was I didn't make the show modal for sign up global so I couldn't know if it was true or false. however, I solved it by add the state inside the App component and passed it as a prop to the other components that need it instead of recall the modal component and add new state to every component needs it.
 
+
+### add more functionality to Authentication component
+
+I start with make differnce btween whether you have an account or don't by changing the text in the form depends on your situation.
+
+

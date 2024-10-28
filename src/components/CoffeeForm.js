@@ -19,7 +19,7 @@ function CoffeeForm (props){
     setShowCoffeeTypes(false)
   }
   const handleSubminForm = ()=> {
-    if(!props.isAuthentication) {
+    if(!props.isAuthenticating) {
       props.setShowModal(true);
       return
     } 

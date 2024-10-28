@@ -1,11 +1,8 @@
 import Modal from './Modal';
 import Authentication from './Authentication'
-// import { useState } from 'react';
 import { CiCoffeeBean } from "react-icons/ci";
 
 function Layout (props){
-  // const [showModal, setShowModal] = useState(false)
-  
   
   const Header = (
     <header className="z-50 fixed top-0 left-0 right-0 max-w-[1220px] mx-auto flex items-center justify-between p-4 h-20 bg-white dark:bg-black">
@@ -25,17 +22,17 @@ function Layout (props){
 
   const Footer = (
     <footer className="mt-10 mb-5 text-center">
-      <p>
+      <div>
         <span className="font-bold text-xl md:text-2xl mr-2"><span className="bg-amber-900 pl-3 pr-1 text-white dark:text-black">C</span>affiend</span>
         was made by <a target="_blank" href="https://github.com/saraNasser4" rel="noreferrer" className="text-amber-900 text-xl md:text-2xl font-medium underline">Sara</a> using TailwindCSS and React JS
-      </p>
+      </div>
 
     </footer>
   )
   return (
     <div className="max-w-[1260px] mx-auto dark:text-white">
       {props.showModal && (<Modal handleCloseModal={()=> props.setShowModal(false)}>
-        <Authentication />
+        <Authentication setIsAuthenticating={props.setIsAuthenticating} />
       </Modal>)}
       {Header}
       <main>
