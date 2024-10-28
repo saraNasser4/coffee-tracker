@@ -20,7 +20,7 @@ function History (){
             const remainingAmount = calculateCurrentCaffeineLevel({ [utcTime]: coffee });
             const summery = `${coffee.name} | ${timeSinceConsume} | (${remainingAmount}mg/${originalAmount}mg)`
             return(
-              <div title={summery} key={index} className="cursor-pointer relative hover:[&>span]:!block">
+              <div title={summery} key={index} className="cursor-pointer">
                 <SiBuymeacoffee size={30} />
               </div>
             )

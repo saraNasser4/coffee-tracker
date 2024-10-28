@@ -36,3 +36,10 @@ I've been trying to make the cards in that component dynamic as I can cuz they a
 
 One new thing I've learnt in this part was that I can display a massage when I hover over it by adding title attribute to the element. 
 I made a dynamic coffee icons that changes its number according to the average amount of coffee you have.
+
+
+### Start with Login and Signup
+
+When you click on sign up btn it's gonna open to you a popup card to enter your informtion.
+I started by adding new root to my html page so it would be independent compare to our root.
+
