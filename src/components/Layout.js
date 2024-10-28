@@ -32,7 +32,7 @@ function Layout (props){
   return (
     <div className="max-w-[1260px] mx-auto dark:text-white">
       {props.showModal && (<Modal handleCloseModal={()=> props.setShowModal(false)}>
-        <Authentication setIsAuthenticating={props.setIsAuthenticating} />
+        <Authentication setIsAuthenticating={props.setIsAuthenticating} setShowModal={props.setShowModal} />
       </Modal>)}
       {Header}
       <main>

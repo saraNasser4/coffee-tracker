@@ -54,3 +54,7 @@ I faced a problem which was I didn't make the show modal for sign up global so I
 I start with make differnce btween whether you have an account or don't by changing the text in the form depends on your situation.
 
 
+### add regux to Authentication component
+
+I needed to make sure that the user's gonna write a vaild email and is not gonna submit the form without data within. so, I made a function check on them.
+
