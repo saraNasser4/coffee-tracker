@@ -43,3 +43,8 @@ I made a dynamic coffee icons that changes its number according to the average a
 When you click on sign up btn it's gonna open to you a popup card to enter your informtion.
 I started by adding new root to my html page so it would be independent compare to our root.
 
+
+### Solve some bugs
+
+I faced a problem which was I didn't make the show modal for sign up global so I couldn't know if it was true or false. however, I solved it by add the state inside the App component and passed it as a prop to the other components that need it instead of recall the modal component and add new state to every component needs it.
+

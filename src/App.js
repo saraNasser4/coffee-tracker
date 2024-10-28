@@ -8,7 +8,9 @@ import DAL from "./components/DAL"
 import { useState } from "react";
 
 function App() {
-  const [state, setState] = useState(true)
+  const [state, setState] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
   const toggleDarkMode = ()=>{
     setState(!state)
     const isDarkMode = document.body.classList.toggle("dark");
@@ -25,9 +27,9 @@ function App() {
   )
 
   return (
-    <Layout darkAndLight={<DAL state={state} toggleDarkMode={toggleDarkMode} />}>
+    <Layout darkAndLight={<DAL state={state} toggleDarkMode={toggleDarkMode} />} showModal={showModal} setShowModal={setShowModal} >
       <Hero />
-      <CoffeeForm />
+      <CoffeeForm isAuthentication={isAuthentication} setShowModal={setShowModal} />
       {isAuthentication && authenticatedContent}
     </Layout>
   );

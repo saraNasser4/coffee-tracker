@@ -3,7 +3,7 @@ import { coffeeOptions } from '../utils';
 import { useState } from 'react';
 
 
-function CoffeeForm (){
+function CoffeeForm (props){
   const btnsStyle = "text-black rounded-md p-2 hover:border-[3px] hover:p-[2px] hover:border-amber-900 hover:bg-amber-200 dark:hover:bg-amber-900 ";
   const selectStyle = "outline-none w-full bg-amber-100 dark:bg-amber-200 text-black rounded-md p-3";
   
@@ -19,7 +19,10 @@ function CoffeeForm (){
     setShowCoffeeTypes(false)
   }
   const handleSubminForm = ()=> {
-    
+    if(!props.isAuthentication) {
+      props.setShowModal(true);
+      return
+    } 
   }
 
   return (

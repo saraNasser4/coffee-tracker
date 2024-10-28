@@ -1,10 +1,10 @@
 import Modal from './Modal';
 import Authentication from './Authentication'
-import { useState } from 'react';
+// import { useState } from 'react';
 import { CiCoffeeBean } from "react-icons/ci";
 
 function Layout (props){
-  const [showModal, setShowModal] = useState(false)
+  // const [showModal, setShowModal] = useState(false)
   
   
   const Header = (
@@ -15,8 +15,8 @@ function Layout (props){
       </div>
       {props.darkAndLight}
       <button 
-        onClick={()=> setShowModal(true)}
-        className={`${showModal ? 'bg-amber-950 translate-x-2 cursor-default' : ' hover:bg-amber-950 hover:translate-x-2'} flex items-center gap-3 rounded-md bg-amber-900 text-white px-4 py-2 transition-all duration-500`}>
+        onClick={()=> props.setShowModal(true)}
+        className={`${props.showModal ? 'bg-amber-950 translate-x-2 cursor-default' : ' hover:bg-amber-950 hover:translate-x-2'} flex items-center gap-3 rounded-md bg-amber-900 text-white px-4 py-2 transition-all duration-500`}>
         <p>Sign up free</p>
         <CiCoffeeBean size={20} />
       </button>
@@ -34,7 +34,7 @@ function Layout (props){
   )
   return (
     <div className="max-w-[1260px] mx-auto dark:text-white">
-      {showModal && (<Modal handleCloseModal={()=> setShowModal(false)}>
+      {props.showModal && (<Modal handleCloseModal={()=> props.setShowModal(false)}>
         <Authentication />
       </Modal>)}
       {Header}
