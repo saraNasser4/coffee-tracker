@@ -58,3 +58,9 @@ I start with make differnce btween whether you have an account or don't by chang
 
 I needed to make sure that the user's gonna write a vaild email and is not gonna submit the form without data within. so, I made a function check on them.
 
+
+### add firebase on the project
+
+I was quite challenging cuz I'd worked before with firebase. So, I started by create the project on firebase website and put the config keys into my project.
+I created a database to my data so whenever a user write its email and password it ends up there.
+

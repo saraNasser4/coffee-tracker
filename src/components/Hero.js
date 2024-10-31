@@ -1,4 +1,5 @@
 import { FaCheck, FaExclamationCircle } from "react-icons/fa";
+
 function Hero (){
   const paragraphs = ['Tracking every coffee', 'Measuring your blood caffeine levels', 'Costing and quanitifying your addition']
 

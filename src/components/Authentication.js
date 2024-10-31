@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { AuthProvider } from "../context/AuthProvider";
 
 function Authentication (props){
-  const [isRegistration, setIsRegistration] = useState(true);
+  const [isRegistration, setIsRegistration] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const formMassage = useRef()
 
   const inputStyle = "block border border-gray-300 dark:border-[#333] bg-gray-200/60 dark:bg-[#181818] rounded-md shadow w-full py-2 px-4 outline-none caret-amber-900 m-2";
   const btnStyle = "rounded-md bg-amber-900 text-white px-4 py-2 hover:bg-amber-950 cursor-pointer my-4"
@@ -13,27 +16,39 @@ function Authentication (props){
   const regexForEmail = /(^[a-z]\w+@[a-z]{3,}(?:(.[a-z]+){1,3}).[com]$)/;
   const isValued = regexForEmail.test(email)
   
-  const handleSubmitBtn = ()=> {
-    let errorMessage = !isValued ? "Your email must match 'exampal@exmpal.com'" :
+  const {signup, login} = AuthProvider;
+
+  async function handleSubmitBtn (){
+    let errorMessage = !isValued ? "Your email must match 'example@exmple.com'" :
       password.length < 8 ? "Your password must be more then 8 characters" : 
       !isRegistration && (firstName.length < 1 || lastName.length < 1) ? "You must fill all the data" : 
       "";
 
-    console.log(!isRegistration && (firstName.length < 1 || lastName.length < 1))
-    
     if (errorMessage) {
-      document.getElementById('massage').innerHTML = `<span class="text-red-600 font-normal">${errorMessage}</span>`
-    } else {
-      props.setShowModal(false)
+      formMassage.current.innerHTML = `<p class="bg-red-600 p-4 text-white max-w-[500px]"><i class="fa-solid fa-circle-exclamation"></i> <span>${errorMessage}</span></p>`
+      return;
+    } 
+
+    try{
       props.setIsAuthenticating(true);
+      if(isRegistration) {
+        await signup(email, password)
+      } else {
+        await login(email, password)
+      }
+      props.setShowModal(false)
+
+    } catch(err) {
+      console.log(err)
+    }finally {
+      props.setIsAuthenticating(false)
     }
-   
   }
 
   return (
     <div className="p-6 max-w-[800px]">
        <h2 className="text-3xl md:text-4xl font-bold tracking-tight my-4">{isRegistration ? 'Login' : 'Sign Up'}</h2>
-       <p className="text-lg md:text-xl font-medium my-4" id="massage">{isRegistration ? 'Your account is waiting for you!' : 'Create an account!'}</p>
+       <p ref={formMassage} className="text-lg md:text-xl font-medium my-4">{isRegistration ? 'Your account is waiting for you!' : 'Create an account!'}</p>
        <div className="border-b mb-7">
         {!isRegistration && 
         <div className="flex -mr-4">
