@@ -6,20 +6,20 @@ import Stats from "./components/Stats";
 import DAL from "./components/DAL"
 
 import { useAuth } from "./context/AuthProvider";
-
 import { useEffect, useState } from "react";
 
 function App() {
-  const [state, setState] = useState(true);
+  const { globalUser } = useAuth()
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   
   
   const toggleDarkMode = ()=>{
-    setState(!state)
+    setIsDarkMode(prev => !prev);
     const isDarkMode = document.body.classList.toggle("dark");
-    document.body.classList.toggle("bg-white", !isDarkMode)
-    document.body.classList.toggle("bg-black", isDarkMode)
+    document.body.classList.toggle("bg-white", !isDarkMode);
+    document.body.classList.toggle("bg-black", isDarkMode);
   }
   
   
@@ -30,19 +30,13 @@ function App() {
     </>
   )
   
-  const {globalUser, logout} = useAuth();
   useEffect(()=> {
-    if(globalUser) {
-      setIsAuthenticating(true);
-    }else {
-      setIsAuthenticating(false)
-    }
-  
+    setIsAuthenticating(!!globalUser);
   }, [globalUser])
   
   return (
     <Layout 
-      darkAndLight={<DAL state={state} toggleDarkMode={toggleDarkMode} />} 
+      darkAndLight={<DAL isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} 
       showModal={showModal} 
       setShowModal={setShowModal}
       setIsAuthenticating={setIsAuthenticating}

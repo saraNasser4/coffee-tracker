@@ -20,12 +20,7 @@ export function AuthProvider(props) {
         await signOut(auth);
     } 
 
-    
-
-    // look here
-    const resetPass = (email)=> sendPasswordResetEmail(auth, email)
-
-    const value = { globalUser, globalData, setGlobalData, isLoading, signup, login, logout, resetPass };
+    const value = { globalUser, globalData, setGlobalData, isLoading, signup, login, logout };
     
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, async(user)=> { 

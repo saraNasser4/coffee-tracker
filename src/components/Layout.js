@@ -6,7 +6,6 @@ import { CiCoffeeBean } from "react-icons/ci";
 function Layout (props){
   const handleShowModal = ()=> props.setShowModal(true);
   const { globalUser, logout } = useAuth()
-  console.log(globalUser)
   
   const Header = (
     <header className="z-50 fixed top-0 left-0 right-0 max-w-[1220px] mx-auto flex items-center justify-between p-4 h-20 bg-white dark:bg-black">
