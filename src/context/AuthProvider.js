@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, createContext } from 'react';
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth, db } from '../firebase'
+import { auth, db } from '../config/firebase'
 import { doc, getDoc } from 'firebase/firestore';
 
 const AuthCotext = createContext();
@@ -12,13 +12,17 @@ export function AuthProvider(props) {
     const [globalData, setGlobalData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-    const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
-    const logout = (email, password) => {
+    const signup = async (email, password)=> await createUserWithEmailAndPassword(auth, email, password);
+    const login = async (email, password)=> await signInWithEmailAndPassword(auth, email, password);
+    const logout = async ()=>{
         setGlobalUser(null);
         setGlobalData(null);
-        signOut(auth, email, password);
-    }
+        await signOut(auth);
+    } 
+
+    
+
+    // look here
     const resetPass = (email)=> sendPasswordResetEmail(auth, email)
 
     const value = { globalUser, globalData, setGlobalData, isLoading, signup, login, logout, resetPass };

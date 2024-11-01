@@ -1,8 +1,12 @@
 import Modal from './Modal';
 import Authentication from './Authentication'
+import { useAuth } from '../context/AuthProvider';
 import { CiCoffeeBean } from "react-icons/ci";
 
 function Layout (props){
+  const handleShowModal = ()=> props.setShowModal(true);
+  const { globalUser, logout } = useAuth()
+  console.log(globalUser)
   
   const Header = (
     <header className="z-50 fixed top-0 left-0 right-0 max-w-[1220px] mx-auto flex items-center justify-between p-4 h-20 bg-white dark:bg-black">
@@ -12,9 +16,9 @@ function Layout (props){
       </div>
       {props.darkAndLight}
       <button 
-        onClick={()=> props.setShowModal(true)}
+        onClick={globalUser ? logout : handleShowModal}
         className={`${props.showModal ? 'bg-amber-950 translate-x-2 cursor-default' : ' hover:bg-amber-950 hover:translate-x-2'} flex items-center gap-3 rounded-md bg-amber-900 text-white px-4 py-2 transition-all duration-500`}>
-        <p>Sign up free</p>
+        <p>{globalUser ? 'Logout' : 'Sign up free'}</p>
         <CiCoffeeBean size={20} />
       </button>
     </header>

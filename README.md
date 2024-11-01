@@ -64,3 +64,7 @@ I needed to make sure that the user's gonna write a vaild email and is not gonna
 I was quite challenging cuz I'd worked before with firebase. So, I started by create the project on firebase website and put the config keys into my project.
 I created a database to my data so whenever a user write its email and password it ends up there.
 
+
+### Solve some bugs
+
+I faced a lot of challenges in this part cuz I didn't grasp on the idea of how firebase works and how we handle the authentiactions. however I started with some tutorials and know I pretty mutch know the basics of it and made the page dynamic if you already have an accout it's gonna automatically login and show your history. 
