@@ -68,3 +68,10 @@ I created a database to my data so whenever a user write its email and password 
 ### Solve some bugs
 
 I faced a lot of challenges in this part cuz I didn't grasp on the idea of how firebase works and how we handle the authentiactions. however I started with some tutorials and know I pretty mutch know the basics of it and made the page dynamic if you already have an accout it's gonna automatically login and show your history. 
+
+
+### Solve some problem in the Authentication
+
+I made the History and Stats components only display if I have data to that accout loged in if it doesn't then remove it.
+
+There was a hug problem in the Authentication component and it was when the user login or signup there was condition on the userGlobal while this variable changed its value in async function so when the project run it was always null cuz its value didn't change immediately so I changed to be more reasonable value in the same component which is 'isRegistration'

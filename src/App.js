@@ -9,11 +9,12 @@ import { useAuth } from "./context/AuthProvider";
 import { useEffect, useState } from "react";
 
 function App() {
-  const { globalUser } = useAuth()
+  const { globalUser, globalData, isLoading } = useAuth()
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   
+  const isData = globalData && !!Object.keys(globalData || {}).length
   
   const toggleDarkMode = ()=>{
     setIsDarkMode(prev => !prev);
@@ -44,7 +45,8 @@ function App() {
     >
       <Hero />
       <CoffeeForm isAuthenticating={isAuthenticating} setShowModal={setShowModal} />
-      {isAuthenticating && authenticatedContent}
+      {(isAuthenticating && isLoading) && <p>Loading data...</p>}
+      {(isAuthenticating && isData) && authenticatedContent}
     </Layout>
   );
 }

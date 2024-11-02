@@ -1,13 +1,17 @@
 import { MdEdit } from 'react-icons/md';
 import { coffeeOptions } from '../utils';
 import { useState } from 'react';
+import { useAuth } from '../context/AuthProvider';
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 
 function CoffeeForm (props){
   const btnsStyle = "text-black rounded-md p-2 hover:border-[3px] hover:p-[2px] hover:border-amber-900 hover:bg-amber-200 dark:hover:bg-amber-900 ";
   const selectStyle = "outline-none w-full bg-amber-100 dark:bg-amber-200 text-black rounded-md p-3";
   
-  const [coffeeSelection, setCoffeeSelection] = useState(null)
+  const { globalData, setGlobalData, globalUser } = useAuth()
+  const [selectedCoffee, setSelectedCoffee] = useState(null)
   const [showCoffeeTypes, setShowCoffeeTypes] = useState(false)
   const [coffeeCost, setCoffeeCost] = useState(0)
   const [hour, setHour] = useState(0)
@@ -15,14 +19,44 @@ function CoffeeForm (props){
 
 
   const handleCoffeeBtns = (option)=> {
-    setCoffeeSelection(option);
+    setSelectedCoffee(option);
     setShowCoffeeTypes(false)
   }
-  const handleSubminForm = ()=> {
+  const handleSubminForm = async()=> {
     if(!props.isAuthenticating) {
       props.setShowModal(true);
       return
     } 
+
+    if(!setSelectedCoffee) { return }
+
+    try {
+      const newGlobalData = {
+        ...(globalData || {}),
+      }
+      const nowTime = Date.now();
+      const timeToSubtract = (hour * 60 * 60 * 1000) + (min * 60 * 100);
+      const timestamp = nowTime - timeToSubtract;
+
+      const newData = {
+        name: selectedCoffee,
+        cost: coffeeCost,
+      }
+      newGlobalData[timestamp] = newData;
+      setGlobalData(newGlobalData)
+
+      const userRef = doc(db, 'users', globalUser.uid)
+      const res = await setDoc(userRef, {
+        [timestamp]: newData,
+      }, { merge: true })
+
+      setSelectedCoffee(null)
+      setHour(0)
+      setMin(0)
+      setCoffeeCost(0)
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   return (
@@ -32,7 +66,7 @@ function CoffeeForm (props){
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 lg:gap-4">
         {coffeeOptions.slice(0,5).map((option, index)=> {
           return(
-            <button key={index} onClick={()=> handleCoffeeBtns(option.name)} className={`${btnsStyle} ${coffeeSelection === option.name && !showCoffeeTypes ? 'border-amber-900 !bg-amber-200 dark:!bg-amber-900 dark:text-white p-[2px] border-[2px]' : 'bg-amber-100 dark:bg-amber-200'}`}>
+            <button key={index} onClick={()=> handleCoffeeBtns(option.name)} className={`${btnsStyle} ${selectedCoffee === option.name && !showCoffeeTypes ? 'border-amber-900 !bg-amber-200 dark:!bg-amber-900 dark:text-white p-[2px] border-[2px]' : 'bg-amber-100 dark:bg-amber-200'}`}>
               <h6 className="font-bold">{option.name}</h6>
               <p>{option.caffeine} mg</p>
             </button>
@@ -41,7 +75,7 @@ function CoffeeForm (props){
         <button 
           onClick={()=> {
             setShowCoffeeTypes(!showCoffeeTypes)
-            setCoffeeSelection(null)
+            setSelectedCoffee(null)
           }}
           className={`${btnsStyle} ${showCoffeeTypes ? 'border-amber-900 !bg-amber-200 dark:!bg-amber-900 dark:text-white p-[2px] border-[2px]' : 'bg-amber-100 dark:bg-amber-200'}`}>
           <h6 className="font-bold">Other</h6>
@@ -49,7 +83,7 @@ function CoffeeForm (props){
         </button>
       </div>
       {showCoffeeTypes &&
-       <select id="coffee-list" name="coffee-list" onChange={(e)=> setCoffeeSelection(e.target.value)} className={`${selectStyle} appearance-none my-6`}>
+       <select id="coffee-list" name="coffee-list" onChange={(e)=> setSelectedCoffee(e.target.value)} className={`${selectStyle} appearance-none my-6`}>
         <option value={null}>Select type</option>
         {coffeeOptions.map((option, index)=> {
           return(

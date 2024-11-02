@@ -15,7 +15,7 @@ function Authentication (props){
   
   const regexForEmail = /(^[a-z]\w+@[a-z]{3,}(?:(.[a-z]+){1,3}).[com]$)/;
   
-  const {signup, login, globalUser} = useAuth();
+  const { signup, login, globalUser } = useAuth();
 
   async function handleSubmitBtn (){
     let errorMessage = !regexForEmail.test(email) ? "Your email must match 'example@exmple.com'" :
@@ -31,20 +31,23 @@ function Authentication (props){
 
     try{
       props.setIsAuthenticating(true);
-      if(globalUser) {
+      
+      if(isRegistration) {
         await login(email, password)
-        console.log("HI FRIEND")
       } else {
         await signup(email, password)
       }
+
       props.setShowModal(false);
       setFirstName('');
       setLastName('');
       setEmail('');
       setPassword('');
       setMessage('');
+      
     } catch(err) {
-      console.error(err)
+      console.error(err.message)
+      setMessage('The email already exists')
     }finally {
       props.setIsAuthenticating(false)
     }
