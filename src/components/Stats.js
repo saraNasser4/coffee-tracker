@@ -1,10 +1,11 @@
 import { IoStatsChart } from "react-icons/io5";
-import { calculateCoffeeStats, calculateCurrentCaffeineLevel, coffeeConsumptionHistory, getTopThreeCoffees, statusLevels } from "../utils";
-
+import { calculateCoffeeStats, calculateCurrentCaffeineLevel, getTopThreeCoffees, statusLevels } from "../utils";
+import { useAuth } from '../context/AuthProvider'
 function Stats(){
-  const stats = calculateCoffeeStats(coffeeConsumptionHistory);
+  const { globalData } = useAuth();
+  const stats = calculateCoffeeStats(globalData);
 
-  const caffeineLevel = calculateCurrentCaffeineLevel(coffeeConsumptionHistory);
+  const caffeineLevel = calculateCurrentCaffeineLevel(globalData);
   const warningLeverl = Number(caffeineLevel) <= statusLevels['low'].maxLevel ? 
     'low' :
     Number(caffeineLevel) <= statusLevels['moderate'].maxLevel ?
@@ -52,7 +53,7 @@ function Stats(){
           </tr>
         </thead>
         <tbody>
-          {getTopThreeCoffees(coffeeConsumptionHistory).map((coffee, index)=> {
+          {getTopThreeCoffees(globalData).map((coffee, index)=> {
             return (
               <tr key={index} className="hover:bg-gray-200/60 dark:hover:bg-[#181818] border dark:border-[#181818] cursor-pointer [&>*]:p-2 [&>*]:md:p-4">
                 <td>{coffee.coffeeName}</td>

@@ -42,11 +42,12 @@ function CoffeeForm (props){
         name: selectedCoffee,
         cost: coffeeCost,
       }
+      
       newGlobalData[timestamp] = newData;
-      setGlobalData(newGlobalData)
+      setGlobalData(newGlobalData);
 
       const userRef = doc(db, 'users', globalUser.uid)
-      const res = await setDoc(userRef, {
+      await setDoc(userRef, {
         [timestamp]: newData,
       }, { merge: true })
 
