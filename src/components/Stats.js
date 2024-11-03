@@ -34,7 +34,7 @@ function Stats(){
                 <span>{card.data[1]}</span>
                 {card.lg && (
                   <>
-                    <h4 className="w-20 inline-block ml-10 text-center" style={{color: statusLevels[warningLeverl].color, background: statusLevels[warningLeverl].background}}>Low</h4>
+                    <h4 className="w-20 inline-block ml-10 text-center" style={{color: statusLevels[warningLeverl].color, background: statusLevels[warningLeverl].background}}>{warningLeverl}</h4>
                     <p className="pt-6">{statusLevels[warningLeverl].description}</p>
                   </>
                   )}
